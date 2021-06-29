@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="adBlockDiv">
+        <item>aatop</item>
+        <item>aafoot</item>
+        <item>leftCouple</item>
+        <item>rightCouple</item>
+        <item>leftFloat</item>
+    </string-array>
+    <string-array name="adBlockDivClass">
+        <item>top_box</item>
+        <item>box-footer clearfix</item>
+    </string-array>
+</resources>
