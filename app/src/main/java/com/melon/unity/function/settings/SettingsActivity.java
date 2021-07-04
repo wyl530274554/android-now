@@ -1,4 +1,4 @@
-package com.melon.unity.ui;
+package com.melon.unity.function.settings;
 
 
 import android.os.Bundle;

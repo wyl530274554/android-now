@@ -1,4 +1,4 @@
-package com.melon.unity.ui.slideshow;
+package com.melon.unity.function.slideshow;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
