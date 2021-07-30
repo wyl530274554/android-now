@@ -3,6 +3,7 @@ package com.melon.commonlib.netty;
 import com.melon.commonlib.util.LogUtil;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -15,10 +16,12 @@ import io.netty.handler.timeout.IdleStateEvent;
 @ChannelHandler.Sharable
 public class NettyHandler extends SimpleChannelInboundHandler {
     private IMessageProcessor mMessageProcessor;
+
     private static final byte[] HEART_BYTES = "1".getBytes();
 
     public NettyHandler(IMessageProcessor messageProcessor) {
         mMessageProcessor = messageProcessor;
+
     }
 
     /**
@@ -75,9 +78,7 @@ public class NettyHandler extends SimpleChannelInboundHandler {
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.WRITER_IDLE) {
                 //写空闲 发送心跳
-                ByteBuf buf = ctx.channel().alloc().buffer(HEART_BYTES.length);
-                buf.writeBytes(HEART_BYTES);
-                ctx.channel().writeAndFlush(buf);
+                ctx.channel().writeAndFlush(Unpooled.copiedBuffer(HEART_BYTES));
 
                 // 注意：下面这两种方式，服务器收不到数据；
                 // 即channel不能直接写原始bytes，需要用ByteBuf包装一下

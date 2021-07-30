@@ -6,7 +6,7 @@ import android.util.Log;
  * @author Melon
  */
 public class LogUtil {
-    public static final String TAG = "Melon:";
+    public static final String TAG = "Melon";
     public static final boolean DEBUG = true;
     public static void v(String tag, String msg) {
         if (DEBUG) {

@@ -27,16 +27,16 @@ public class SocketClient implements TextToSpeech.OnInitListener {
 
     }
 
-    public static SocketClient getInstance(Context context) {
-        sContext = context;
-
+    public static SocketClient getInstance() {
         return sClient;
     }
 
-    public void init() {
+    public void init(Context context) {
         if (isInit) {
             throw new RuntimeException("SocketClient不能重复初始化");
         }
+
+        sContext = context;
 
         mSpeech = new TextToSpeech(sContext, this);
 
@@ -57,14 +57,7 @@ public class SocketClient implements TextToSpeech.OnInitListener {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 5; i++) {
-                    mSpeech.speak("欢迎回家", TextToSpeech.QUEUE_FLUSH, null);
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+                mSpeech.speak("欢迎回家", TextToSpeech.QUEUE_FLUSH, null);
             }
         }, 5000);
     }
@@ -72,5 +65,9 @@ public class SocketClient implements TextToSpeech.OnInitListener {
     @Override
     public void onInit(int status) {
         LogUtil.d("onInit: " + status);
+    }
+
+    public boolean isOnline() {
+        return Netty.getInstance().isOnline(HOST, PORT);
     }
 }

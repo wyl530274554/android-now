@@ -14,6 +14,6 @@ public class AppApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ToastUtil.init(this);
-        SocketClient.getInstance(this).init();
+        SocketClient.getInstance().init(this);
     }
 }

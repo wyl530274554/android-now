@@ -22,12 +22,16 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 
+import static com.melon.commonlib.netty.NettyConfig.HEART_TIME_SECOND;
+
 /**
  * netty Socket api
  * <p>
  * 需要两步
  * 1、init
  * 2、connect
+ * <p>
+ * TODO 实现多路连接
  */
 public class Netty {
     private static final Netty sNetty = new Netty();
@@ -51,6 +55,17 @@ public class Netty {
 
     public void reConnect() {
         connect(mHost, mPort);
+    }
+
+    /**
+     * 是否在线
+     *
+     * @param host 主机
+     * @param port 端口
+     */
+    public boolean isOnline(String host, int port) {
+        //TODO 按多路实现
+        return mChannel != null && mChannel.isActive();
     }
 
     /**
@@ -80,7 +95,7 @@ public class Netty {
 
     public void init(IMessageProcessor processor) {
         mNettyHandler = new NettyHandler(processor);
-        EventLoopGroup mWorkerGroup = new NioEventLoopGroup();
+        EventLoopGroup mWorkerGroup = new NioEventLoopGroup(4);
 
         //主通信Netty 初始化
         mBootstrap = new Bootstrap();
@@ -94,9 +109,9 @@ public class Netty {
                 LogUtil.d("initChannel");
                 ChannelPipeline pipeline = ch.pipeline();
                 //心跳处理
-                pipeline.addLast(new IdleStateHandler(0, 10, 0));
+                pipeline.addLast(new IdleStateHandler(0, HEART_TIME_SECOND, 0));
                 //分隔符解码器，以0x7e断包
-                addDelimiterHandler(pipeline);
+//                addDelimiterHandler(pipeline);
                 pipeline.addLast(mNettyHandler);
             }
 
@@ -185,12 +200,5 @@ public class Netty {
             mChannel.close();
             mChannel = null;
         }
-    }
-
-    /**
-     * 主通信是否连接中
-     */
-    public boolean isMainChannelConnected() {
-        return mChannel != null && mChannel.isActive();
     }
 }

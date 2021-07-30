@@ -5,7 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,24 +20,29 @@ import com.melon.unity.function.settings.SettingsActivity;
 public class MainActivity extends BaseActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding viewDataBinding;
+    ActivityMainBinding mViewDataBing;
 
     @Override
-    protected void initDataBinding() {
-        viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+    protected void onDataBindingView(ViewDataBinding viewDataBing) {
+        mViewDataBing = (ActivityMainBinding) viewDataBing;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override
     protected void initView() {
-        setSupportActionBar(viewDataBinding.includeMainBar.toolbar);
-        viewDataBinding.includeMainBar.fab.setOnClickListener(this);
+        setSupportActionBar(mViewDataBing.includeMainBar.toolbar);
+        mViewDataBing.includeMainBar.fab.setOnClickListener(this);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setDrawerLayout(viewDataBinding.drawerLayout)
+                .setDrawerLayout(mViewDataBing.drawerLayout)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(viewDataBinding.navView, navController);
+        NavigationUI.setupWithNavController(mViewDataBing.navView, navController);
     }
 
     @Override
