@@ -10,16 +10,26 @@ android {
         applicationId "com.melon.unity"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
+        versionCode 10035 //主版本号+次版本号+修正号，二位一表示
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        common {
+            keyAlias 'melon'
+            keyPassword '123456'
+            storeFile file('myapp.jks')
+            storePassword '123456'
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.common
         }
     }
     compileOptions {
@@ -27,13 +37,20 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
+    }
+
+    //包名
+    applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
+            }
     }
 }
 
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

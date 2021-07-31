@@ -14,6 +14,7 @@ public class TextToSpeechUtil {
         mSpeech = new TextToSpeech(ctx, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
+                LogUtil.d("onInit: " + status);
                 isInitOk = (status == 0);
             }
         });
