@@ -7,6 +7,8 @@ import android.app.DownloadManager;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -94,10 +96,12 @@ public class CommonUtil {
         }
         return statusBarHeight;
     }
+
     //全屏
     public static void fullScreen(Activity act) {
         act.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
     public static void cancelFullScreen(Activity act) {
         act.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
@@ -314,5 +318,19 @@ public class CommonUtil {
         Uri uri = Uri.parse(url);
         intent.setData(uri);
         ctx.startActivity(intent);
+    }
+
+    /**
+     * 版本名
+     */
+    public static String packageVersion(Context context) {
+        PackageManager manager = context.getPackageManager();
+        try {
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            return info.versionName + "." + info.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

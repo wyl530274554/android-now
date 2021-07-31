@@ -3,6 +3,7 @@ package com.melon.unity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
@@ -43,6 +44,9 @@ public class MainActivity extends BaseActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(mViewDataBing.navView, navController);
+
+        TextView subTimeView = mViewDataBing.navView.getHeaderView(0).findViewById(R.id.tv_nav_header_subtitle);
+        subTimeView.setText("V" + CommonUtil.packageVersion(getApplicationContext()));
     }
 
     @Override

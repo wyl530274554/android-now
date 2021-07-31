@@ -3,6 +3,7 @@ package com.melon.unity.function.home;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.databinding.ViewDataBinding;
@@ -14,7 +15,7 @@ import com.melon.commonlib.util.LogUtil;
 import com.melon.unity.R;
 import com.melon.unity.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends BaseFragment implements TextView.OnEditorActionListener {
+public class HomeFragment extends BaseFragment implements TextView.OnEditorActionListener, AdapterView.OnItemClickListener {
 
     private HomeViewModel mHomeViewModel;
     private FragmentHomeBinding mViewDataBinding;
@@ -31,6 +32,8 @@ public class HomeFragment extends BaseFragment implements TextView.OnEditorActio
                 mViewDataBinding.etHomeContent.setText(s);
             }
         });
+        mViewDataBinding.gvHomeTag.setAdapter(new HomeAdapter(mHomeViewModel.getTags()));
+        mViewDataBinding.gvHomeTag.setOnItemClickListener(this);
     }
 
     @Override
@@ -71,4 +74,8 @@ public class HomeFragment extends BaseFragment implements TextView.OnEditorActio
         return false;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mHomeViewModel.clickTag(position, getContext());
+    }
 }

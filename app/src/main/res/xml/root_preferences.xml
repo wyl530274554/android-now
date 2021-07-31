@@ -7,7 +7,7 @@
             app:summaryOff="离线中"
             app:summaryOn="在线"
             app:title="在线状态" />
-
+        
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/messages_header">
