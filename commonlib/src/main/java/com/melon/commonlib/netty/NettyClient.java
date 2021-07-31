@@ -1,8 +1,6 @@
 package com.melon.commonlib.netty;
 
-import android.os.Handler;
-import android.os.Looper;
-
+import com.melon.commonlib.listener.ConnectListener;
 import com.melon.commonlib.util.LogUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -33,8 +31,11 @@ import static com.melon.commonlib.netty.NettyConfig.HEART_TIME_SECOND;
  * <p>
  * TODO 实现多路连接
  */
-public class Netty {
-    private static final Netty sNetty = new Netty();
+public class NettyClient {
+    /**
+     * 单例
+     */
+    private static final NettyClient NETTY_CLIENT = new NettyClient();
     private NettyHandler mNettyHandler;
     /**
      * 主通信服务启动器
@@ -68,21 +69,11 @@ public class Netty {
         return mChannel != null && mChannel.isActive();
     }
 
-    /**
-     * 连接结果回调
-     */
-    public interface ConnectListener {
-        /**
-         * 成功
-         */
-        void onSuccess();
+    private NettyClient() {
     }
 
-    private Netty() {
-    }
-
-    public static Netty getInstance() {
-        return sNetty;
+    public static NettyClient getInstance() {
+        return NETTY_CLIENT;
     }
 
     public void setConnectListener(ConnectListener connectListener) {

@@ -1,35 +1,74 @@
 package com.melon.unity.function.home;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.melon.commonlib.BaseFragment;
+import com.melon.commonlib.util.LogUtil;
 import com.melon.unity.R;
+import com.melon.unity.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment implements TextView.OnEditorActionListener {
 
-    private HomeViewModel homeViewModel;
+    private HomeViewModel mHomeViewModel;
+    private FragmentHomeBinding mViewDataBinding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    @Override
+    protected void init() {
+        mViewDataBinding.ivHomeSearch.setOnClickListener(this);
+        mViewDataBinding.etHomeContent.setOnEditorActionListener(this);
+        mViewDataBinding.ivHomeDel.setOnClickListener(this);
+
+        mHomeViewModel.getText().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onChanged(String s) {
+                mViewDataBinding.etHomeContent.setText(s);
             }
         });
-        return root;
     }
+
+    @Override
+    protected void onDataBindingView(ViewDataBinding viewDataBinding) {
+        mViewDataBinding = (FragmentHomeBinding) viewDataBinding;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    protected void getViewModel() {
+        mHomeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        if (v.getId() == R.id.iv_home_search) {
+            String content = mViewDataBinding.etHomeContent.getText().toString().trim();
+            mHomeViewModel.search(getContext(), content);
+        }
+
+        if (v.getId() == R.id.iv_home_del) {
+            mHomeViewModel.deleteSearchContent();
+        }
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            String content = v.getText().toString().trim();
+            mHomeViewModel.search(getContext(), content);
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+/**
+ * Activity基类，方便统一控制
+ */
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
     protected Bundle savedInstanceState;
     protected ViewDataBinding viewDataBinding;

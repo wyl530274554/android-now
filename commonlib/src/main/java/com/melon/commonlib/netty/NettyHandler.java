@@ -65,7 +65,7 @@ public class NettyHandler extends SimpleChannelInboundHandler {
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
         LogUtil.e("NettyHandler channelInactive，断线重连");
-        Netty.getInstance().reConnect();
+        NettyClient.getInstance().reConnect();
     }
 
     /**

@@ -301,4 +301,18 @@ public class CommonUtil {
             return "size: error";
         }
     }
+
+    /**
+     * 跳转至浏览器
+     */
+    public static void enterBrowser(Context ctx, String url) {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        if (ctx instanceof Application) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        Uri uri = Uri.parse(url);
+        intent.setData(uri);
+        ctx.startActivity(intent);
+    }
 }

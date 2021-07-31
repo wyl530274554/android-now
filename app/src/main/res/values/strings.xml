@@ -2,8 +2,8 @@
     <string name="app_name">Unity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">个人信息</string>
+    <string name="nav_header_subtitle">邮箱地址</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -27,4 +27,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="text_input_content">输入内容</string>
+    <string name="text_search">搜索</string>
+    <string name="text_del">删除</string>
 </resources>
