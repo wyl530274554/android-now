@@ -9,19 +9,24 @@ import androidx.databinding.ViewDataBinding;
 
 import com.melon.commonlib.BaseActivity;
 import com.melon.unity.R;
-import com.melon.unity.databinding.SettingsActivityBinding;
+import com.melon.unity.databinding.ActivitySettingsBinding;
 
 public class SettingsActivity extends BaseActivity {
-    SettingsActivityBinding mViewDataBinding;
+    ActivitySettingsBinding mViewDataBinding;
+
+    @Override
+    protected void getViewModel() {
+        //nothing
+    }
 
     @Override
     protected void onDataBindingView(ViewDataBinding viewDataBinding) {
-        mViewDataBinding = (SettingsActivityBinding) viewDataBinding;
+        mViewDataBinding = (ActivitySettingsBinding) viewDataBinding;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.settings_activity;
+        return R.layout.activity_settings;
     }
 
     @Override

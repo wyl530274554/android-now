@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.melon.commonlib.BaseFragment;
-import com.melon.commonlib.util.LogUtil;
 import com.melon.unity.R;
 import com.melon.unity.databinding.FragmentHomeBinding;
 
@@ -76,6 +75,6 @@ public class HomeFragment extends BaseFragment implements TextView.OnEditorActio
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mHomeViewModel.clickTag(position, getContext());
+        mHomeViewModel.enterTag(position, getContext());
     }
 }

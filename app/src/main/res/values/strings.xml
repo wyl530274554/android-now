@@ -29,4 +29,5 @@
     <string name="text_input_content">输入内容</string>
     <string name="text_search">搜索</string>
     <string name="text_del">删除</string>
+    <string name="text_add">添加</string>
 </resources>

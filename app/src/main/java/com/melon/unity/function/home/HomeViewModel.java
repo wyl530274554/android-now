@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.melon.commonlib.util.CommonUtil;
 import com.melon.commonlib.util.Constant;
 import com.melon.commonlib.util.LogUtil;
+import com.melon.unity.function.password.PasswordActivity;
 
 public class HomeViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
@@ -48,10 +49,11 @@ public class HomeViewModel extends ViewModel {
         return new String[]{"密码", "上海南站", "车墩站", "聊天", "电话本"};
     }
 
-    public void clickTag(int position, Context ctx) {
+    public void enterTag(int position, Context ctx) {
         switch (position) {
             case 0:
                 //查询密码
+                CommonUtil.enterActivity(ctx, PasswordActivity.class);
                 break;
             case 1:
                 //查询金山铁路-上海南站

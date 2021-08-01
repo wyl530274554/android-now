@@ -24,6 +24,11 @@ public class MainActivity extends BaseActivity {
     ActivityMainBinding mViewDataBing;
 
     @Override
+    protected void getViewModel() {
+        //nothing
+    }
+
+    @Override
     protected void onDataBindingView(ViewDataBinding viewDataBing) {
         mViewDataBing = (ActivityMainBinding) viewDataBing;
     }

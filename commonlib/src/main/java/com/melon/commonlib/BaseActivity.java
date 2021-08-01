@@ -19,10 +19,16 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
+        getViewModel();
         viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         onDataBindingView(viewDataBinding);
         initView();
     }
+
+    /**
+     * 初始化viewModel
+     */
+    protected abstract void getViewModel();
 
     /**
      * 获取到了ViewDataBinding，回调回去，子Activity可以转为自己的具体类型
