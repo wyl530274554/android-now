@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -52,6 +53,12 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
     protected void initView() {
         mViewBinding.etPwdSearch.setOnEditorActionListener(this);
         mViewBinding.lvPassword.setOnItemClickListener(this);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("密码");
+        }
     }
 
     @Override
