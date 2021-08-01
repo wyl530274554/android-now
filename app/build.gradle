@@ -10,7 +10,7 @@ android {
         applicationId "com.melon.unity"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 10035 //主版本号+次版本号+修正号，二位一表示
+        versionCode 10036 //主版本号+次版本号+修正号，二位一表示
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
