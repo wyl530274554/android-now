@@ -1,11 +1,13 @@
 package com.melon.unity.function.password;
 
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.Observer;
@@ -74,5 +76,14 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mPasswordAdapter.show(position);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return false;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
