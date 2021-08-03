@@ -16,7 +16,6 @@ public class PasswordModel {
 
     public void queryPasswords(String content, PasswordNetCallback passwordNetCallback) {
         String url = ApiUtil.API_PASSWORD + content;
-        LogUtil.d("url: " + url);
         HttpUtil.doGet(url, new HttpUtil.HttpCallbackStringListener() {
             @Override
             public void onFinish(String response) {

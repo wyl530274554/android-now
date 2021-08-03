@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 
 import com.melon.commonlib.listener.NettyConnectListener;
+import com.melon.commonlib.util.ApiUtil;
 import com.melon.commonlib.util.LogUtil;
 import com.melon.commonlib.util.TextToSpeechUtil;
 import com.melon.commonlib.util.ToastUtil;
@@ -23,6 +24,7 @@ public class AppApplication extends Application {
         LogUtil.d("AppApplication onCreate");
 
         mApp = this;
+        ApiUtil.initIp(this);
         ToastUtil.init(this);
         TextToSpeechUtil.init(this);
         SocketClient.getInstance().init(new NettyConnectListener());

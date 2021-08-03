@@ -13,7 +13,7 @@
     <PreferenceCategory app:title="@string/messages_header">
 
         <EditTextPreference
-            app:key="signature"
+            app:key="ip"
             app:title="@string/signature_title"
             app:useSimpleSummaryProvider="true" />
 

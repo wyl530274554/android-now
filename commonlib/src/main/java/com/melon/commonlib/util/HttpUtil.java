@@ -67,7 +67,10 @@ public class HttpUtil {
                 URL url;
                 HttpURLConnection httpURLConnection = null;
                 try {
-                    url = new URL(urlString);
+                    url = new URL(ApiUtil.API_BASE + urlString);
+
+                    LogUtil.d("请求地址: " + url);
+
                     httpURLConnection = (HttpURLConnection) url.openConnection();
                     if (params != null) {
                         httpURLConnection.setRequestMethod("POST");
