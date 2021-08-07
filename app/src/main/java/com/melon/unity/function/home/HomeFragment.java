@@ -47,6 +47,7 @@ public class HomeFragment extends BaseFragment implements TextView.OnEditorActio
     @Override
     protected void getViewModel() {
         mHomeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        mHomeViewModel.requestServerStatus();
     }
 
     @Override

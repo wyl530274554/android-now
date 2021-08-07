@@ -19,14 +19,14 @@ android {
     //主版本号
     int major = 1
     //子版本号
-    int minor = 0
+    int minor = 1
 
     defaultConfig {
         applicationId "com.melon.unity"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode getGitCommitCount()
-        versionName major + "." + minor + "." + getGitCommitId()
+        versionName major + "." + minor + "." + versionCode + "." + getGitCommitId()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

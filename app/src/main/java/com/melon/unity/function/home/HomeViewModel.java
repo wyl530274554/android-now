@@ -10,6 +10,10 @@ import com.melon.commonlib.util.CommonUtil;
 import com.melon.commonlib.util.Constant;
 import com.melon.commonlib.util.LogUtil;
 import com.melon.unity.function.password.PasswordActivity;
+import com.melon.unity.listener.NetCallback;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeViewModel extends ViewModel {
     /**
@@ -20,18 +24,20 @@ public class HomeViewModel extends ViewModel {
     /**
      * http服务器在线状态
      */
-    private final MutableLiveData<Boolean> mServerStatus;
+    private final MutableLiveData<String> mServerStatus;
+    private final HomeModel mMHomeModel;
 
     public HomeViewModel() {
         mContent = new MutableLiveData<>();
         mServerStatus = new MutableLiveData<>();
+        mMHomeModel = new HomeModel();
     }
 
     public MutableLiveData<String> getContent() {
         return mContent;
     }
 
-    public MutableLiveData<Boolean> getServerStatus() {
+    public MutableLiveData<String> getServerStatus() {
         return mServerStatus;
     }
 
@@ -46,17 +52,6 @@ public class HomeViewModel extends ViewModel {
         String url = Constant.URL_BAI_DU + mContent.getValue();
         CommonUtil.enterBrowser(ctx, url);
     }
-//    /**
-//     * 浏览器搜索
-//     */
-//    public void search(Context ctx, String content) {
-//        if (TextUtils.isEmpty(content)) {
-//            LogUtil.d("输入为空");
-//            return;
-//        }
-//        String url = Constant.URL_BAI_DU + content;
-//        CommonUtil.enterBrowser(ctx, url);
-//    }
 
     /**
      * 清空输入
@@ -95,5 +90,30 @@ public class HomeViewModel extends ViewModel {
                 break;
             default:
         }
+    }
+
+    /**
+     * 网络请求服务器
+     */
+    public void requestServerStatus() {
+        // 定时，每15秒请求一次
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                mMHomeModel.requestServerStatus(new NetCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        if ("true".equals(result)) {
+                            mServerStatus.postValue("在线中");
+                        }
+                    }
+
+                    @Override
+                    public void onFail() {
+                        mServerStatus.postValue("不在线");
+                    }
+                });
+            }
+        }, 0, Constant.SERVER_HEART_BEAT_TIME);
     }
 }

@@ -8,7 +8,4 @@ import com.melon.unity.net.SocketClient;
  */
 public class SettingsModel {
 
-    public boolean isOnline() {
-        return SocketClient.getInstance().isOnline();
-    }
 }

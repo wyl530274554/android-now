@@ -3,7 +3,7 @@ package com.melon.unity.function.password;
 import com.melon.commonlib.util.ApiUtil;
 import com.melon.commonlib.util.HttpUtil;
 import com.melon.commonlib.util.LogUtil;
-import com.melon.commonlib.util.ToastUtil;
+import com.melon.unity.listener.NetCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PasswordModel {
 
-    public void queryPasswords(String content, PasswordNetCallback passwordNetCallback) {
+    public void queryPasswords(String content, NetCallback<List<Password>> netCallback) {
         String url = ApiUtil.API_PASSWORD + content;
         HttpUtil.doGet(url, new HttpUtil.HttpCallbackStringListener() {
             @Override
@@ -36,7 +36,7 @@ public class PasswordModel {
                     e.printStackTrace();
                     LogUtil.e("Json异常");
                 }
-                passwordNetCallback.onSuccess(passwords);
+                netCallback.onSuccess(passwords);
             }
 
             @Override
