@@ -2,16 +2,34 @@ plugins {
     id 'com.android.application'
 }
 
+//Git提交次数
+private static def getGitCommitCount() {
+    return "git rev-list --count HEAD".execute().getText().toInteger()
+}
+
+//Git提交id，如a24e796d
+private static def getGitCommitId() {
+    return "git rev-parse --short HEAD".execute().getText().toString().trim()
+}
+
+//提交的唯一标识
+def commitId = getGitCommitId()
+
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
+
+    //主版本号
+    int major = 1
+    //子版本号
+    int minor = 0
 
     defaultConfig {
         applicationId "com.melon.unity"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 10036 //主版本号+次版本号+修正号，二位一表示
-        versionName "1.0"
+        versionCode getGitCommitCount()
+        versionName major + "." + minor + "." + commitId
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,7 +63,7 @@ android {
     applicationVariants.all {
         variant ->
             variant.outputs.all {
-                outputFileName = "melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
+                outputFileName = "melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + "_" + commitId + ".apk"
             }
     }
 }

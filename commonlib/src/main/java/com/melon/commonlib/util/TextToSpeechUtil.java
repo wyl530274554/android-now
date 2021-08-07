@@ -5,6 +5,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 
+/**
+ * 文字转语音
+ */
 public class TextToSpeechUtil {
     private static TextToSpeech mSpeech;
     public static boolean isInitOk;
@@ -31,7 +34,7 @@ public class TextToSpeechUtil {
             }, 2000);
             return;
         }
-
+        LogUtil.d("播放声音："+text);
         mSpeech.speak(text, TextToSpeech.QUEUE_ADD, null, text);
     }
 }

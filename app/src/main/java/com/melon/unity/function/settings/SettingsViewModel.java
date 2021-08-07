@@ -29,16 +29,16 @@ import java.util.TimerTask;
 public class SettingsViewModel extends ViewModel {
     private final SettingsModel mModel = new SettingsModel();
     //可观测数据
-    private final MutableLiveData<Boolean> onlineState = new MutableLiveData<>();
+//    private final MutableLiveData<Boolean> onlineState = new MutableLiveData<>();
+//
+//    public MutableLiveData<Boolean> getOnlineState() {
+//        return onlineState;
+//    }
 
-    public MutableLiveData<Boolean> getOnlineState() {
-        return onlineState;
-    }
-
-    public void initOnlineState() {
-        //查询一次状态
-        boolean online = mModel.isOnline();
-        LogUtil.d("online: " + online);
-        onlineState.setValue(online);
-    }
+//    public void initOnlineState() {
+//        //查询一次状态
+//        boolean online = mModel.isOnline();
+//        LogUtil.d("online: " + online);
+//        onlineState.setValue(online);
+//    }
 }

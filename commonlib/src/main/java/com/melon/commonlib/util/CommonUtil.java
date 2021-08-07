@@ -327,7 +327,7 @@ public class CommonUtil {
         PackageManager manager = context.getPackageManager();
         try {
             PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
-            return info.versionName + "." + info.versionCode;
+            return info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

@@ -31,15 +31,15 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         LogUtil.d("init: ");
         switchOnlineState = findPreference("online");
 
-        //注册数据观察
-        mViewModel.getOnlineState().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean isOnline) {
-                switchOnlineState.setChecked(isOnline);
-            }
-        });
-
-        //查询状态
-        mViewModel.initOnlineState();
+//        //注册数据观察
+//        mViewModel.getOnlineState().observe(this, new Observer<Boolean>() {
+//            @Override
+//            public void onChanged(Boolean isOnline) {
+//                switchOnlineState.setChecked(isOnline);
+//            }
+//        });
+//
+//        //查询状态
+//        mViewModel.initOnlineState();
     }
 }

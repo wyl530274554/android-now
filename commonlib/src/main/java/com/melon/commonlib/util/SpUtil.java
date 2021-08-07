@@ -2,6 +2,7 @@ package com.melon.commonlib.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class SpUtil {
 	/**
