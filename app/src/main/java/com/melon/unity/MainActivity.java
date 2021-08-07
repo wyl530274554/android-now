@@ -2,7 +2,6 @@ package com.melon.unity;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,11 +11,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.melon.commonlib.BaseActivity;
 import com.melon.commonlib.util.CommonUtil;
 import com.melon.unity.databinding.ActivityMainBinding;
 import com.melon.unity.function.settings.SettingsActivity;
+import com.melon.unity.net.SocketClient;
 
 public class MainActivity extends BaseActivity {
 
@@ -41,17 +40,19 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         setSupportActionBar(mViewDataBing.includeMainBar.toolbar);
-        mViewDataBing.includeMainBar.fab.setOnClickListener(this);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setDrawerLayout(mViewDataBing.drawerLayout)
+                .setOpenableLayout(mViewDataBing.drawerLayout)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(mViewDataBing.navView, navController);
 
-        TextView subTimeView = mViewDataBing.navView.getHeaderView(0).findViewById(R.id.tv_nav_header_subtitle);
-        subTimeView.setText("V" + CommonUtil.packageVersion(getApplicationContext()));
+        //显示版本
+        TextView subTitleView = mViewDataBing.navView.getHeaderView(0).findViewById(R.id.tv_nav_header_subtitle);
+        TextView titleView = mViewDataBing.navView.getHeaderView(0).findViewById(R.id.tv_nav_header_title);
+        subTitleView.setText("V".concat(CommonUtil.getVersion(getApplicationContext())));
+        titleView.setText(SocketClient.getInstance().isOnline() ? "当前在家" : "当前不在家");
     }
 
     @Override
@@ -76,9 +77,4 @@ public class MainActivity extends BaseActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    public void onClick(View v) {
-        Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
 }

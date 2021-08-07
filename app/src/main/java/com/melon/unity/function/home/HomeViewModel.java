@@ -3,7 +3,6 @@ package com.melon.unity.function.home;
 import android.content.Context;
 import android.text.TextUtils;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -13,33 +12,57 @@ import com.melon.commonlib.util.LogUtil;
 import com.melon.unity.function.password.PasswordActivity;
 
 public class HomeViewModel extends ViewModel {
-    private final MutableLiveData<String> mText;
+    /**
+     * 要搜索的内容
+     */
+    private final MutableLiveData<String> mContent;
+
+    /**
+     * http服务器在线状态
+     */
+    private final MutableLiveData<Boolean> mServerStatus;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
+        mContent = new MutableLiveData<>();
+        mServerStatus = new MutableLiveData<>();
     }
 
-    public MutableLiveData<String> getText() {
-        return mText;
+    public MutableLiveData<String> getContent() {
+        return mContent;
+    }
+
+    public MutableLiveData<Boolean> getServerStatus() {
+        return mServerStatus;
     }
 
     /**
      * 浏览器搜索
      */
-    public void search(Context ctx, String content) {
-        if (TextUtils.isEmpty(content)) {
+    public void search(Context ctx) {
+        if (TextUtils.isEmpty(mContent.getValue())) {
             LogUtil.d("输入为空");
             return;
         }
-        String url = Constant.URL_BAI_DU + content;
+        String url = Constant.URL_BAI_DU + mContent.getValue();
         CommonUtil.enterBrowser(ctx, url);
     }
+//    /**
+//     * 浏览器搜索
+//     */
+//    public void search(Context ctx, String content) {
+//        if (TextUtils.isEmpty(content)) {
+//            LogUtil.d("输入为空");
+//            return;
+//        }
+//        String url = Constant.URL_BAI_DU + content;
+//        CommonUtil.enterBrowser(ctx, url);
+//    }
 
     /**
      * 清空输入
      */
     public void deleteSearchContent() {
-        mText.setValue("");
+        mContent.setValue("");
     }
 
     /**

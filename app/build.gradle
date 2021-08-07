@@ -7,13 +7,10 @@ private static def getGitCommitCount() {
     return "git rev-list --count HEAD".execute().getText().toInteger()
 }
 
-//Git提交id，如a24e796d
+//Git提交唯一标识id，如a24e796d
 private static def getGitCommitId() {
     return "git rev-parse --short HEAD".execute().getText().toString().trim()
 }
-
-//提交的唯一标识
-def commitId = getGitCommitId()
 
 android {
     compileSdkVersion 30
@@ -29,7 +26,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 30
         versionCode getGitCommitCount()
-        versionName major + "." + minor + "." + commitId
+        versionName major + "." + minor + "." + getGitCommitId()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -63,7 +60,7 @@ android {
     applicationVariants.all {
         variant ->
             variant.outputs.all {
-                outputFileName = "melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + "_" + commitId + ".apk"
+                outputFileName = "melon_" + defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk"
             }
     }
 }

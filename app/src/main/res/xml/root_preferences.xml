@@ -4,9 +4,9 @@
 
         <SwitchPreferenceCompat
             app:key="online"
-            app:summaryOff="下线"
-            app:summaryOn="上线"
-            app:title="在线开关" />
+            app:summaryOff="关闭"
+            app:summaryOn="开启"
+            app:title="开关状态" />
         
     </PreferenceCategory>
 

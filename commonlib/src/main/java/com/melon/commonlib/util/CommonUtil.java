@@ -323,7 +323,7 @@ public class CommonUtil {
     /**
      * 版本名
      */
-    public static String packageVersion(Context context) {
+    public static String getVersion(Context context) {
         PackageManager manager = context.getPackageManager();
         try {
             PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
