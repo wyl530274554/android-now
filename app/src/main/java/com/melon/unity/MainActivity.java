@@ -17,10 +17,14 @@ import com.melon.unity.databinding.ActivityMainBinding;
 import com.melon.unity.function.settings.SettingsActivity;
 import com.melon.unity.net.SocketClient;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends BaseActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     ActivityMainBinding mViewDataBing;
+    private TextView mTitleView;
 
     @Override
     protected void getViewModel() {
@@ -50,9 +54,19 @@ public class MainActivity extends BaseActivity {
 
         //显示版本
         TextView subTitleView = mViewDataBing.navView.getHeaderView(0).findViewById(R.id.tv_nav_header_subtitle);
-        TextView titleView = mViewDataBing.navView.getHeaderView(0).findViewById(R.id.tv_nav_header_title);
+        mTitleView = mViewDataBing.navView.getHeaderView(0).findViewById(R.id.tv_nav_header_title);
         subTitleView.setText("V".concat(CommonUtil.getVersion(getApplicationContext())));
-        titleView.setText(SocketClient.getInstance().isOnline() ? "当前在家" : "当前不在家");
+
+        showBackHome();
+    }
+
+    private void showBackHome() {
+        AppApplication.getHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mTitleView.setText(SocketClient.getInstance().isOnline() ? "当前在家" : "当前不在家");
+            }
+        }, 5000);
     }
 
     @Override
