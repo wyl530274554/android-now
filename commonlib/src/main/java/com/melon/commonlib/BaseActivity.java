@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.melon.commonlib.util.LogUtil;
+
 /**
  * Activity基类，方便统一控制
  */
@@ -23,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         onDataBindingView(viewDataBinding);
         initView();
+        LogUtil.e("onCreate");
     }
 
     /**

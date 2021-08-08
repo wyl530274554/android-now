@@ -17,8 +17,10 @@ public class TextToSpeechUtil {
         mSpeech = new TextToSpeech(ctx, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                LogUtil.d("onInit: " + status);
                 isInitOk = (status == 0);
+                if (isInitOk) {
+                    LogUtil.d("文本转语音 初始化完成");
+                }
             }
         });
     }
@@ -34,7 +36,7 @@ public class TextToSpeechUtil {
             }, 2000);
             return;
         }
-        LogUtil.d("播放声音："+text);
+        LogUtil.d("播放声音：" + text);
         mSpeech.speak(text, TextToSpeech.QUEUE_ADD, null, text);
     }
 }

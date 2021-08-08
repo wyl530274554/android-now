@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.melon.commonlib.util.CommonUtil;
 import com.melon.commonlib.util.Constant;
 import com.melon.commonlib.util.LogUtil;
+import com.melon.unity.AppApplication;
 import com.melon.unity.function.password.PasswordActivity;
 import com.melon.unity.listener.NetCallback;
 
@@ -92,28 +93,54 @@ public class HomeViewModel extends ViewModel {
         }
     }
 
+//    private static final Timer mTimer = new Timer();
+//    private TimerTask mTimerTask = new TimerTask() {
+//
+//        @Override
+//        public void run() {
+//            mMHomeModel.requestServerStatus(new NetCallback<String>() {
+//                @Override
+//                public void onSuccess(String result) {
+//                    if ("true".equals(result)) {
+//                        mServerStatus.postValue("在线中");
+//                    }
+//                }
+//
+//                @Override
+//                public void onFail() {
+//                    mServerStatus.postValue("不在线");
+//                }
+//            });
+//        }
+//    };
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+//        mTimerTask.cancel();
+//        mTimerTask = null;
+//        LogUtil.d("任务取消");
+    }
+
     /**
      * 网络请求服务器
      */
     public void requestServerStatus() {
-        // 定时，每15秒请求一次
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                mMHomeModel.requestServerStatus(new NetCallback<String>() {
-                    @Override
-                    public void onSuccess(String result) {
-                        if ("true".equals(result)) {
-                            mServerStatus.postValue("在线中");
-                        }
-                    }
+        // 请求数据
+//        mTimer.scheduleAtFixedRate(mTimerTask, 0, Constant.SERVER_HEART_BEAT_TIME);
 
-                    @Override
-                    public void onFail() {
-                        mServerStatus.postValue("不在线");
-                    }
-                });
+        mMHomeModel.requestServerStatus(new NetCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if ("true".equals(result)) {
+                    mServerStatus.postValue("在线中");
+                }
             }
-        }, 0, Constant.SERVER_HEART_BEAT_TIME);
+
+            @Override
+            public void onFail() {
+                mServerStatus.postValue("不在线");
+            }
+        });
     }
 }

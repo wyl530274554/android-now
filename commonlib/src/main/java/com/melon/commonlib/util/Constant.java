@@ -15,5 +15,5 @@ public class Constant {
     public static final String URL_JD = "https://m.jd.com";
     public static final String URL_JPUSH_API = "https://api.jpush.cn/v3/push";
     public static final String BROADCAST_NEW_NOTIFY = "1000";
-    public static final int SERVER_HEART_BEAT_TIME = 30 * 1000;
+    public static final int SERVER_HEART_BEAT_TIME = 15 * 1000;
 }
