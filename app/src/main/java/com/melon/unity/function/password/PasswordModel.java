@@ -1,6 +1,7 @@
 package com.melon.unity.function.password;
 
 import com.melon.commonlib.util.ApiUtil;
+import com.melon.commonlib.util.DESUtil;
 import com.melon.commonlib.util.HttpUtil;
 import com.melon.commonlib.util.LogUtil;
 import com.melon.unity.listener.NetCallback;
@@ -19,6 +20,8 @@ public class PasswordModel {
         HttpUtil.doGet(url, new HttpUtil.HttpCallbackStringListener() {
             @Override
             public void onFinish(String response) {
+                long start = System.currentTimeMillis();
+
                 List<Password> passwords = new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONArray(response);
@@ -29,13 +32,15 @@ public class PasswordModel {
                         String username = jsonObject.optString("username");
                         String pwd = jsonObject.optString("pwd");
                         String remark = jsonObject.optString("remark");
-                        Password password = new Password(id, title, username, pwd, remark);
+                        Password password = new Password(id, title, username, DESUtil.decrypt(pwd), remark);
                         passwords.add(password);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     LogUtil.e("Json异常");
                 }
+
+                LogUtil.d("共花费时间：" + (System.currentTimeMillis() - start));
                 netCallback.onSuccess(passwords);
             }
 
