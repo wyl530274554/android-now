@@ -27,10 +27,6 @@ public class DESUtil {
      */
     private static final String CHARSET = "utf-8";
     /**
-     * 设置秘钥key
-     */
-    private static final String KEY_STR = "91Pc^78%";
-    /**
      * 加密器
      */
     private static Cipher sEncryptCipher;
@@ -39,9 +35,20 @@ public class DESUtil {
      */
     private static Cipher sDecryptCipher;
 
+    /**
+     * 1、声明本地方法
+     */
+    public static native String getDESKey();
+
     static {
+        //2、加载Native库
+        System.loadLibrary("native-lib");
+
+        //DES初始化
         try {
-            DESKeySpec dks = new DESKeySpec(KEY_STR.getBytes(CHARSET));
+            //3、调用本地方法
+            String desKey = getDESKey();
+            DESKeySpec dks = new DESKeySpec(desKey.getBytes(CHARSET));
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
             SecretKey sSecretKey = keyFactory.generateSecret(dks);
 
