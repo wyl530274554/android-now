@@ -25,7 +25,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         onDataBindingView(viewDataBinding);
         initView();
-        LogUtil.e("onCreate");
     }
 
     /**

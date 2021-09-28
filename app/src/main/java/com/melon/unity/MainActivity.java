@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
         AppApplication.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mTitleView.setText(SocketClient.getInstance().isOnline() ? "当前在家" : "当前不在家");
+                mTitleView.setText(SocketClient.getInstance().isOnline() ? "Netty在线" : "Netty不在线");
             }
         }, 5000);
     }

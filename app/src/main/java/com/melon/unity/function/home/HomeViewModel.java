@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.preference.PreferenceManager;
 
 import com.melon.commonlib.util.CommonUtil;
 import com.melon.commonlib.util.Constant;
@@ -50,7 +51,17 @@ public class HomeViewModel extends ViewModel {
             LogUtil.d("输入为空");
             return;
         }
-        String url = Constant.URL_BAI_DU + mContent.getValue();
+
+        //获取选择的搜索引擎
+        String url;
+        String engineStr = PreferenceManager.getDefaultSharedPreferences(ctx).getString("engine", "0");
+        int engine = Integer.parseInt(engineStr);
+        LogUtil.d("engine: "+engine);
+        if (engine == 0) {
+            url = Constant.URL_BAI_DU + mContent.getValue();
+        } else {
+            url = Constant.URL_BING + mContent.getValue();
+        }
         CommonUtil.enterBrowser(ctx, url);
     }
 

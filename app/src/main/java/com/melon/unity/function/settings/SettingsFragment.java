@@ -5,10 +5,12 @@ import android.os.Bundle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.melon.commonlib.util.LogUtil;
+import com.melon.commonlib.util.ToastUtil;
 import com.melon.unity.R;
 
 /**
@@ -30,6 +32,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void init() {
         LogUtil.d("init: ");
         switchOnlineState = findPreference("online");
+        ListPreference engine = findPreference("engine");
+        assert engine != null;
+        int value = Integer.parseInt(engine.getValue());
+        LogUtil.d("value: " + value);
 
 //        //注册数据观察
 //        mViewModel.getOnlineState().observe(this, new Observer<Boolean>() {
