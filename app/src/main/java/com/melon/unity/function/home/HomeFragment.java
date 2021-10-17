@@ -90,6 +90,6 @@ public class HomeFragment extends BaseFragment implements TextView.OnEditorActio
     @Override
     public void afterTextChanged(Editable s) {
         //双向绑定的一部分（View->ViewModel）(可以在xml中配置方法调用，用来设置value值)，另一部分是xml中的android:text="@{homeViewModel.content}" （ViewModel->View）
-        mHomeViewModel.getContent().setValue(s.toString().trim());
+        mHomeViewModel.getContent().setValue(s.toString());
     }
 }

@@ -76,7 +76,7 @@ public class HomeViewModel extends ViewModel {
      * 标签
      */
     public String[] getTags() {
-        return new String[]{"密码", "上海南站", "车墩站", "聊天", "电话本"};
+        return new String[]{"密码", "上海南站", "车墩站", "聊天"};
     }
 
     public void enterTag(int position, Context ctx) {
@@ -95,42 +95,15 @@ public class HomeViewModel extends ViewModel {
                 break;
             case 3:
                 //聊天
-                CommonUtil.enterBrowser(ctx, "http://192.168.100.234/topic");
-                break;
-            case 4:
-                //电话本
+                CommonUtil.enterBrowser(ctx, "http://192.168.1.234/topic");
                 break;
             default:
         }
     }
 
-//    private static final Timer mTimer = new Timer();
-//    private TimerTask mTimerTask = new TimerTask() {
-//
-//        @Override
-//        public void run() {
-//            mMHomeModel.requestServerStatus(new NetCallback<String>() {
-//                @Override
-//                public void onSuccess(String result) {
-//                    if ("true".equals(result)) {
-//                        mServerStatus.postValue("在线中");
-//                    }
-//                }
-//
-//                @Override
-//                public void onFail() {
-//                    mServerStatus.postValue("不在线");
-//                }
-//            });
-//        }
-//    };
-
     @Override
     protected void onCleared() {
         super.onCleared();
-//        mTimerTask.cancel();
-//        mTimerTask = null;
-//        LogUtil.d("任务取消");
     }
 
     /**
@@ -138,8 +111,6 @@ public class HomeViewModel extends ViewModel {
      */
     public void requestServerStatus() {
         // 请求数据
-//        mTimer.scheduleAtFixedRate(mTimerTask, 0, Constant.SERVER_HEART_BEAT_TIME);
-
         mMHomeModel.requestServerStatus(new NetCallback<String>() {
             @Override
             public void onSuccess(String result) {

@@ -36,16 +36,5 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         assert engine != null;
         int value = Integer.parseInt(engine.getValue());
         LogUtil.d("value: " + value);
-
-//        //注册数据观察
-//        mViewModel.getOnlineState().observe(this, new Observer<Boolean>() {
-//            @Override
-//            public void onChanged(Boolean isOnline) {
-//                switchOnlineState.setChecked(isOnline);
-//            }
-//        });
-//
-//        //查询状态
-//        mViewModel.initOnlineState();
     }
 }

@@ -14,7 +14,7 @@ import com.melon.commonlib.util.LogUtil;
 @SuppressLint("StaticFieldLeak")
 public class SocketClient {
     private static final SocketClient sClient = new SocketClient();
-    private static final String HOST = "192.168.100.234";
+    private static final String HOST = "192.168.1.234";
     private static final int PORT = 8066;
     private static boolean isInitialized;
 

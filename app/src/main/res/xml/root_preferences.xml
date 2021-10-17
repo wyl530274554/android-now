@@ -6,8 +6,7 @@
             app:key="online"
             app:summaryOff="关闭"
             app:summaryOn="开启"
-            app:title="开关状态" />
-
+            app:title="Netty连接" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/messages_header">

@@ -62,4 +62,11 @@ public class SpUtil {
 		getSharePerference(context).edit().remove(key).commit();
 	}
 
+	/**
+	 * 默认设置
+	 */
+	public static boolean getSettingBoolean(Context context, String key) {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return preferences.getBoolean(key, false);
+	}
 }
