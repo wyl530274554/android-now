@@ -15,7 +15,7 @@ import android.text.TextUtils;
  */
 public class ApiUtil {
     private static final String API_PROTOCOL = "http://";
-    public static String API_IP = "192.168.1.234";
+    public static String API_IP = "192.168.100.234";
     private static final String API_PORT = "80";
     public static String API_BASE;
 
@@ -39,7 +39,11 @@ public class ApiUtil {
             API_IP = ip;
         }
 
-        API_BASE = API_PROTOCOL + API_IP + ":" + API_PORT + "/";
+        if (ip != null && ip.contains(":")) {
+            API_BASE = API_PROTOCOL + API_IP + "/";
+        } else {
+            API_BASE = API_PROTOCOL + API_IP + ":" + API_PORT + "/";
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -90,7 +91,7 @@ public class HttpUtil {
                     if (httpURLConnection.getResponseCode() == 200) {
                         // 获取网络的输入流
                         InputStream is = httpURLConnection.getInputStream();
-                        BufferedReader bf = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                        BufferedReader bf = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
                         //最好在将字节流转换为字符流的时候 进行转码
                         StringBuilder buffer = new StringBuilder();
                         String line = "";
