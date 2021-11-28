@@ -39,7 +39,11 @@ public class ApiUtil {
             API_IP = ip;
         }
 
-        API_BASE = API_PROTOCOL + API_IP + ":" + API_PORT + "/";
+        if (ip != null && ip.contains(":")) {
+            API_BASE = API_PROTOCOL + API_IP + "/";
+        } else {
+            API_BASE = API_PROTOCOL + API_IP + ":" + API_PORT + "/";
+        }
     }
 
 }

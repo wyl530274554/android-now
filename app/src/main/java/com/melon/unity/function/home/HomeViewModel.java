@@ -10,6 +10,7 @@ import androidx.preference.PreferenceManager;
 import com.melon.commonlib.util.CommonUtil;
 import com.melon.commonlib.util.Constant;
 import com.melon.commonlib.util.LogUtil;
+import com.melon.commonlib.util.NetUtil;
 import com.melon.unity.AppApplication;
 import com.melon.unity.function.password.PasswordActivity;
 import com.melon.unity.listener.NetCallback;
@@ -57,7 +58,7 @@ public class HomeViewModel extends ViewModel {
         String engineStr = PreferenceManager.getDefaultSharedPreferences(ctx).getString("engine", "0");
         int engine = Integer.parseInt(engineStr);
         LogUtil.d("engine: "+engine);
-        if (engine == 0) {
+        if (engine == 0 || NetUtil.isWifiConnected(ctx)) {
             url = Constant.URL_BAI_DU + mContent.getValue();
         } else {
             url = Constant.URL_BING + mContent.getValue();
