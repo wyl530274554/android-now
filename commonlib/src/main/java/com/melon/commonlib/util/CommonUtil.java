@@ -137,12 +137,10 @@ public class CommonUtil {
     /**
      * 复制到剪切板
      */
-    public static void addToClipboard(Context ctx, String value) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            ClipboardManager cmb2 = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
-            cmb2.setText(value);
-            ToastUtil.toast("已复制");
-        }
+    public static void copy(Context ctx, String value) {
+        ClipboardManager cbm = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+        cbm.setText(value);
+        ToastUtil.toast("已复制");
     }
 
     /**

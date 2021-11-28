@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.melon.commonlib.BaseActivity;
+import com.melon.commonlib.util.CommonUtil;
 import com.melon.unity.R;
 import com.melon.unity.databinding.ActivityPasswordBinding;
 
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * 密码管理
  */
-public class PasswordActivity extends BaseActivity implements TextView.OnEditorActionListener, AdapterView.OnItemClickListener {
+public class PasswordActivity extends BaseActivity implements TextView.OnEditorActionListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private ActivityPasswordBinding mViewBinding;
     private PasswordViewModel mViewModel;
@@ -55,6 +56,7 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
     protected void initView() {
         mViewBinding.etPwdSearch.setOnEditorActionListener(this);
         mViewBinding.lvPassword.setOnItemClickListener(this);
+        mViewBinding.lvPassword.setOnItemLongClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -85,5 +87,12 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
             return false;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        String pwd = mViewModel.getPasswords().getValue().get(position).getPwd();
+        CommonUtil.copy(this, pwd);
+        return true;
     }
 }
