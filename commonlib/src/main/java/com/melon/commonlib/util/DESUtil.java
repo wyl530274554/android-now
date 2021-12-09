@@ -1,9 +1,6 @@
 package com.melon.commonlib.util;
 
-import android.annotation.SuppressLint;
 import android.util.Base64;
-
-import com.melon.commonlib.encryption.Base64Utils;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -11,7 +8,6 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
-//import java.util.Base64;
 
 public class DESUtil {
 
