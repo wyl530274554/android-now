@@ -1,12 +1,17 @@
 package com.melon.commonlib.util;
 
+import android.annotation.SuppressLint;
+import android.util.Base64;
+
+import com.melon.commonlib.encryption.Base64Utils;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
-import java.util.Base64;
+//import java.util.Base64;
 
 public class DESUtil {
 
@@ -75,8 +80,8 @@ public class DESUtil {
         try {
             byte[] bytes = sEncryptCipher.doFinal(data.getBytes(CHARSET));
             //JDK1.8及以上可直接使用Base64（Android需要API26），JDK1.7及以下可以使用BASE64Encoder
-            //Android平台也可以使用android.util.Base64
-            return new String(Base64.getEncoder().encode(bytes));
+            //Android平台建议使用android.util.Base64
+            return new String(Base64.encode(bytes, Base64.DEFAULT));
         } catch (Exception e) {
             LogUtil.e("encrypt error, " + e.getMessage());
             return data;
@@ -91,7 +96,7 @@ public class DESUtil {
      */
     public static String decrypt(String data) {
         try {
-            return new String(sDecryptCipher.doFinal(Base64.getDecoder().decode(data.getBytes(CHARSET))), CHARSET);
+            return new String(sDecryptCipher.doFinal(Base64.decode(data, Base64.DEFAULT)), CHARSET);
         } catch (Exception e) {
             LogUtil.e("decrypt error, " + e.getMessage());
             return data;

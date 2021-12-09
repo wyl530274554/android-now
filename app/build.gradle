@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         applicationId "com.melon.unity"
-        minSdkVersion 25
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode getGitCommitCount()
         versionName major + "." + minor + "." + versionCode + "." + getGitCommitId()
