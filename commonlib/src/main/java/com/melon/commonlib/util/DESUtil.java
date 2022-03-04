@@ -43,7 +43,7 @@ public class DESUtil {
 
     static {
         //2、加载Native库
-        System.loadLibrary("native-lib");
+        System.loadLibrary("ndk");
 
         //DES初始化
         try {
