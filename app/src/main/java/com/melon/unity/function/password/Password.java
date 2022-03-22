@@ -7,6 +7,16 @@ public class Password {
     private String pwd;
     private String remark;
 
+    public Password() {
+    }
+
+    public Password(String title, String username, String pwd, String remark) {
+        this.title = title;
+        this.username = username;
+        this.pwd = pwd;
+        this.remark = remark;
+    }
+
     public Password(int id, String title, String username, String pwd, String remark) {
         this.id = id;
         this.title = title;

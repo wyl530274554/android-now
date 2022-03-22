@@ -15,16 +15,9 @@ import android.text.TextUtils;
  */
 public class ApiUtil {
     private static final String API_PROTOCOL = "http://";
-    public static String API_IP = "192.168.100.234";
+    public static String API_IP = "192.168.31.234";
     private static final String API_PORT = "80";
     public static String API_BASE;
-
-    public static final String API_NOTE_ADD = "note/addNote";
-    public static final String API_NOTE_DEL = "note/delNote";
-    public static final String API_NOTE_UPDATE = "note/updateNote";
-    public static final String API_NOTE_QUERY = "note/queryNote";
-    public static final String API_NOTE_ALL = "note/queryAllNote";
-    public static final String API_GET_ALL_IMAGE = "index/allImages";
 
     public static final String API_CONTACTS = "contacts/";
     public static final String API_PASSWORD = "password/";

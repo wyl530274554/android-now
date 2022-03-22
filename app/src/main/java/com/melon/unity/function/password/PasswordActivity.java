@@ -57,6 +57,7 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
         mViewBinding.etPwdSearch.setOnEditorActionListener(this);
         mViewBinding.lvPassword.setOnItemClickListener(this);
         mViewBinding.lvPassword.setOnItemLongClickListener(this);
+        mViewBinding.btPasswordSubmit.setOnClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -94,5 +95,17 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
         String pwd = mViewModel.getPasswords().getValue().get(position).getPwd();
         CommonUtil.copy(this, pwd);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+
+        String title = mViewBinding.etPasswordTitle.getText().toString().trim();
+        String pwd = mViewBinding.etPasswordPwd.getText().toString().trim();
+        String username = mViewBinding.etPasswordUsername.getText().toString().trim();
+        String remark = mViewBinding.etPasswordRemark.getText().toString().trim();
+        Password password = new Password(title, username, pwd, remark);
+        mViewModel.insertPassword(password);
     }
 }

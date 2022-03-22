@@ -29,4 +29,8 @@ public class PasswordViewModel extends ViewModel {
             }
         });
     }
+
+    public void insertPassword(Password password){
+        mModel.insert(password);
+    }
 }
