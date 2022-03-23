@@ -1,6 +1,8 @@
 package com.melon.unity.function.password;
 
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -29,17 +31,22 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
     private PasswordViewModel mViewModel;
     private PasswordAdapter mPasswordAdapter;
 
+    /**
+     * 密码监视器
+     */
+    private class PasswordObserver implements Observer<List<Password>> {
+
+        @Override
+        public void onChanged(List<Password> passwords) {
+            mPasswordAdapter = new PasswordAdapter(passwords);
+            mViewBinding.lvPassword.setAdapter(mPasswordAdapter);
+        }
+    }
+
     @Override
     protected void getViewModel() {
         mViewModel = new ViewModelProvider(this).get(PasswordViewModel.class);
-        mViewModel.getPasswords().observe(this, new Observer<List<Password>>() {
-            @Override
-            public void onChanged(List<Password> passwords) {
-                //FIXME 不要每次new一个adapter
-                mPasswordAdapter = new PasswordAdapter(passwords);
-                mViewBinding.lvPassword.setAdapter(mPasswordAdapter);
-            }
-        });
+        mViewModel.getPasswords().observe(this, new PasswordObserver());
     }
 
     @Override
@@ -82,10 +89,22 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_password, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             this.finish();
             return false;
+        }
+
+        if (item.getItemId() == R.id.action_add_pwd) {
+            mViewBinding.rlPasswordAdd.setVisibility(View.VISIBLE);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -100,7 +119,13 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
     @Override
     public void onClick(View v) {
         super.onClick(v);
+        if (v.getId() == R.id.bt_password_submit) {
+            submitPassword();
+            return;
+        }
+    }
 
+    private void submitPassword() {
         String title = mViewBinding.etPasswordTitle.getText().toString().trim();
         String pwd = mViewBinding.etPasswordPwd.getText().toString().trim();
         String username = mViewBinding.etPasswordUsername.getText().toString().trim();

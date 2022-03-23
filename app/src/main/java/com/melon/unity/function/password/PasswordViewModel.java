@@ -7,6 +7,9 @@ import com.melon.unity.listener.NetCallback;
 
 import java.util.List;
 
+/**
+ * ViewModel存储和管理 UI 相关数据
+ */
 public class PasswordViewModel extends ViewModel {
     private final MutableLiveData<List<Password>> mPasswords = new MutableLiveData<>();
     private final PasswordModel mModel = new PasswordModel();

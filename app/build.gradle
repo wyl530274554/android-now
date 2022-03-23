@@ -19,7 +19,7 @@ android {
     //主版本号
     int major = 1
     //子版本号
-    int minor = 2
+    int minor = 4
 
     defaultConfig {
         applicationId "com.melon.unity"
