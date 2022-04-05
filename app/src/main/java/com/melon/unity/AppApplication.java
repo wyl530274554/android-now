@@ -6,6 +6,7 @@ import android.speech.tts.TextToSpeech;
 
 import com.melon.commonlib.listener.NettyConnectListener;
 import com.melon.commonlib.util.ApiUtil;
+import com.melon.commonlib.util.CrashHandler;
 import com.melon.commonlib.util.LogUtil;
 import com.melon.commonlib.util.SpUtil;
 import com.melon.commonlib.util.TextToSpeechUtil;
@@ -28,6 +29,7 @@ public class AppApplication extends Application {
         ApiUtil.initIp(this);
         ToastUtil.init(this);
         TextToSpeechUtil.init(this);
+        CrashHandler.getInstance().init(this);
 
         boolean onlineOpen = SpUtil.getSettingBoolean(this, "online");
         if (onlineOpen) {
