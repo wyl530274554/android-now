@@ -16,11 +16,13 @@ import android.text.TextUtils;
 public class ApiUtil {
     private static final String API_PROTOCOL = "http://";
     public static String API_IP = "192.168.31.234";
-    private static final String API_PORT = "80";
+    private static final String API_PORT = "8080";
     public static String API_BASE;
 
     public static final String API_CONTACTS = "contacts/";
     public static final String API_PASSWORD = "password/";
+    public static final String API_TOPIC = "topic/";
+    public static final String API_MONEY = "money/";
     public static final String API_APP_UPGRADE = "/upgrade";
 
     public static final String APP_DOWNLOAD = "file/";

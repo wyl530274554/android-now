@@ -1,5 +1,8 @@
 package com.melon.unity.function.home;
 
+import static com.melon.commonlib.util.ApiUtil.API_BASE;
+import static com.melon.commonlib.util.ApiUtil.API_TOPIC;
+
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -11,12 +14,9 @@ import com.melon.commonlib.util.CommonUtil;
 import com.melon.commonlib.util.Constant;
 import com.melon.commonlib.util.LogUtil;
 import com.melon.commonlib.util.NetUtil;
-import com.melon.unity.AppApplication;
+import com.melon.unity.function.money.MoneyActivity;
 import com.melon.unity.function.password.PasswordActivity;
 import com.melon.unity.listener.NetCallback;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class HomeViewModel extends ViewModel {
     /**
@@ -57,7 +57,7 @@ public class HomeViewModel extends ViewModel {
         String url;
         String engineStr = PreferenceManager.getDefaultSharedPreferences(ctx).getString("engine", "0");
         int engine = Integer.parseInt(engineStr);
-        LogUtil.d("engine: "+engine);
+        LogUtil.d("engine: " + engine);
         if (engine == 0 || NetUtil.isWifiConnected(ctx)) {
             url = Constant.URL_BAI_DU + mContent.getValue();
         } else {
@@ -77,7 +77,7 @@ public class HomeViewModel extends ViewModel {
      * 标签
      */
     public String[] getTags() {
-        return new String[]{"密码", "上海南站", "车墩站", "聊天"};
+        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡"};
     }
 
     public void enterTag(int position, Context ctx) {
@@ -96,7 +96,15 @@ public class HomeViewModel extends ViewModel {
                 break;
             case 3:
                 //聊天
-                CommonUtil.enterBrowser(ctx, "http://192.168.1.234/topic");
+                CommonUtil.enterBrowser(ctx, API_BASE + API_TOPIC);
+                break;
+            case 4:
+                //天气
+                CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "天气");
+                break;
+            case 5:
+                //金鸡
+                CommonUtil.enterActivity(ctx, MoneyActivity.class);
                 break;
             default:
         }

@@ -19,7 +19,7 @@ android {
     //主版本号
     int major = 1
     //子版本号
-    int minor = 4
+    int minor = 5
 
     defaultConfig {
         applicationId "com.melon.unity"
@@ -42,6 +42,12 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.common
+        }
+
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.common
