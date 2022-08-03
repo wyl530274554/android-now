@@ -77,7 +77,7 @@ public class HomeViewModel extends ViewModel {
      * 标签
      */
     public String[] getTags() {
-        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡"};
+        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡", "沪深"};
     }
 
     public void enterTag(int position, Context ctx) {
@@ -105,6 +105,10 @@ public class HomeViewModel extends ViewModel {
             case 5:
                 //金鸡
                 CommonUtil.enterActivity(ctx, MoneyActivity.class);
+                break;
+            case 6:
+                //沪深300
+                CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "399300");
                 break;
             default:
         }
