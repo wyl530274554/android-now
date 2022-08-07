@@ -14,6 +14,7 @@ import com.melon.commonlib.util.CommonUtil;
 import com.melon.commonlib.util.Constant;
 import com.melon.commonlib.util.LogUtil;
 import com.melon.commonlib.util.NetUtil;
+import com.melon.unity.function.RandomPasswordActivity;
 import com.melon.unity.function.money.MoneyActivity;
 import com.melon.unity.function.password.PasswordActivity;
 import com.melon.unity.listener.NetCallback;
@@ -77,7 +78,7 @@ public class HomeViewModel extends ViewModel {
      * 标签
      */
     public String[] getTags() {
-        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡", "沪深"};
+        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡", "沪深", "密码生成"};
     }
 
     public void enterTag(int position, Context ctx) {
@@ -109,6 +110,10 @@ public class HomeViewModel extends ViewModel {
             case 6:
                 //沪深300
                 CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "399300");
+                break;
+            case 7:
+                //随机密码
+                CommonUtil.enterActivity(ctx, RandomPasswordActivity.class);
                 break;
             default:
         }
