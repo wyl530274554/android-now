@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <queries>
         <intent>
             <action android:name="android.intent.action.TTS_SERVICE" />
@@ -37,6 +40,7 @@
         <activity android:name=".function.password.PasswordActivity" />
         <activity android:name=".function.money.MoneyActivity" />
         <activity android:name=".function.RandomPasswordActivity" />
+        <activity android:name=".function.TimeSpaceCaptureActivity" />
     </application>
 
 </manifest>
