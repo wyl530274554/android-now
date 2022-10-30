@@ -116,7 +116,7 @@ public class HomeViewModel extends ViewModel {
                 break;
             case 3:
                 //聊天
-                enterMyWeb(ctx, API_BASE + API_TOPIC);
+                CommonUtil.enterBrowser(ctx, API_BASE + API_TOPIC);
                 break;
             case 4:
                 //天气

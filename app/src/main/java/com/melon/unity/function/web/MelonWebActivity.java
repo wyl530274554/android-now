@@ -33,7 +33,12 @@ public class MelonWebActivity extends BaseActivity {
     @Override
     protected void initView() {
         webView = findViewById(R.id.wv_web);
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return !url.startsWith("http");
+            }
+        });
         webView.setWebChromeClient(new WebChromeClient());
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
