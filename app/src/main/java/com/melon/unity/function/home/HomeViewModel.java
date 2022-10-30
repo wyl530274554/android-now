@@ -73,10 +73,17 @@ public class HomeViewModel extends ViewModel {
         if (isSystemBrowser) {
             CommonUtil.enterBrowser(ctx, url);
         } else {
-            Intent intent = new Intent(ctx, MelonWebActivity.class);
-            intent.putExtra("url", url);
-            ctx.startActivity(intent);
+            enterMyWeb(ctx, url);
         }
+    }
+
+    /**
+     * 进入自己的浏览器
+     */
+    private void enterMyWeb(Context ctx, String url) {
+        Intent intent = new Intent(ctx, MelonWebActivity.class);
+        intent.putExtra("url", url);
+        ctx.startActivity(intent);
     }
 
     /**
@@ -101,19 +108,19 @@ public class HomeViewModel extends ViewModel {
                 break;
             case 1:
                 //查询金山铁路-上海南站
-                CommonUtil.enterBrowser(ctx, "http://www.shjstl.com/lately.php?station=%E4%B8%8A%E6%B5%B7%E5%8D%97%E7%AB%99");
+                enterMyWeb(ctx, "http://www.shjstl.com/lately.php?station=%E4%B8%8A%E6%B5%B7%E5%8D%97%E7%AB%99");
                 break;
             case 2:
                 //查询金山铁路-车墩站
-                CommonUtil.enterBrowser(ctx, "http://www.shjstl.com/lately.php?station=%E8%BD%A6%E5%A2%A9");
+                enterMyWeb(ctx, "http://www.shjstl.com/lately.php?station=%E8%BD%A6%E5%A2%A9");
                 break;
             case 3:
                 //聊天
-                CommonUtil.enterBrowser(ctx, API_BASE + API_TOPIC);
+                enterMyWeb(ctx, API_BASE + API_TOPIC);
                 break;
             case 4:
                 //天气
-                CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "天气");
+                enterMyWeb(ctx, Constant.URL_BAI_DU + "天气");
                 break;
             case 5:
                 //金鸡
@@ -121,11 +128,11 @@ public class HomeViewModel extends ViewModel {
                 break;
             case 6:
                 //沪深300
-                CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "399300");
+                enterMyWeb(ctx, Constant.URL_BAI_DU + "399300");
                 break;
             case 7:
                 //中国联通
-                CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "600050");
+                enterMyWeb(ctx, Constant.URL_BAI_DU + "600050");
                 break;
             case 8:
                 //随机密码
@@ -137,7 +144,7 @@ public class HomeViewModel extends ViewModel {
                 break;
             case 10:
                 //舜宇集团
-                CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "02382");
+                enterMyWeb(ctx, Constant.URL_BAI_DU + "02382");
                 break;
             case 11:
                 //升级
