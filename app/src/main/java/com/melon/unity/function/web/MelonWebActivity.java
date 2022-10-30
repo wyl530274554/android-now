@@ -37,6 +37,7 @@ public class MelonWebActivity extends BaseActivity {
         webView.setWebChromeClient(new WebChromeClient());
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
+        settings.setBlockNetworkImage(true);
 
         String url = getIntent().getStringExtra("url");
         webView.loadUrl(url);
