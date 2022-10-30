@@ -23,9 +23,8 @@ public class ApiUtil {
     public static final String API_PASSWORD = "password/";
     public static final String API_TOPIC = "topic/";
     public static final String API_MONEY = "money/";
-    public static final String API_APP_UPGRADE = "/upgrade";
 
-    public static final String APP_DOWNLOAD = "file/";
+    public static final String APP_DOWNLOAD = "files/";
 
     public static void initIp(Context ctx) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);

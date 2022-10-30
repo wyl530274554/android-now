@@ -2,6 +2,7 @@ package com.melon.unity.function.home;
 
 import static com.melon.commonlib.util.ApiUtil.API_BASE;
 import static com.melon.commonlib.util.ApiUtil.API_TOPIC;
+import static com.melon.commonlib.util.ApiUtil.APP_DOWNLOAD;
 
 import android.content.Context;
 import android.content.Intent;
@@ -89,7 +90,7 @@ public class HomeViewModel extends ViewModel {
      * 标签
      */
     public String[] getTags() {
-        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡", "沪深", "中国联通", "密码生成", "时空掠影", "舜宇"};
+        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡", "沪深", "中国联通", "密码生成", "时空掠影", "舜宇", "升级"};
     }
 
     public void enterTag(int position, Context ctx) {
@@ -137,6 +138,10 @@ public class HomeViewModel extends ViewModel {
             case 10:
                 //舜宇集团
                 CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "02382");
+                break;
+            case 11:
+                //升级
+                CommonUtil.enterBrowser(ctx, API_BASE + APP_DOWNLOAD);
                 break;
             default:
         }
