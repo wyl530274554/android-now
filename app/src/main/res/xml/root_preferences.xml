@@ -7,6 +7,12 @@
             app:summaryOff="关闭"
             app:summaryOn="开启"
             app:title="Netty连接" />
+
+        <SwitchPreferenceCompat
+            app:key="ieType"
+            app:summaryOff="关闭"
+            app:summaryOn="开启"
+            app:title="系统浏览器" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/messages_header">

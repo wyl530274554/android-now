@@ -305,7 +305,7 @@ public class CommonUtil {
     }
 
     /**
-     * 跳转至浏览器
+     * 跳转至系统浏览器
      */
     public static void enterBrowser(Context ctx, String url) {
         Intent intent = new Intent();

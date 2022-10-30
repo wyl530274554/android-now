@@ -19,6 +19,7 @@ import com.melon.unity.R;
  */
 public class SettingsFragment extends PreferenceFragmentCompat {
     SwitchPreferenceCompat switchOnlineState;
+    SwitchPreferenceCompat switchIeTypeState;
     SettingsViewModel mViewModel;
 
     @Override
@@ -32,6 +33,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void init() {
         LogUtil.d("init: ");
         switchOnlineState = findPreference("online");
+        switchIeTypeState = findPreference("ieType");
         ListPreference engine = findPreference("engine");
         assert engine != null;
         int value = Integer.parseInt(engine.getValue());

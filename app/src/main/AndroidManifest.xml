@@ -41,6 +41,7 @@
         <activity android:name=".function.money.MoneyActivity" />
         <activity android:name=".function.RandomPasswordActivity" />
         <activity android:name=".function.TimeSpaceCaptureActivity" />
+        <activity android:name=".function.web.MelonWebActivity" />
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import static com.melon.commonlib.util.ApiUtil.API_BASE;
 import static com.melon.commonlib.util.ApiUtil.API_TOPIC;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
 import androidx.lifecycle.MutableLiveData;
@@ -18,6 +19,7 @@ import com.melon.unity.function.RandomPasswordActivity;
 import com.melon.unity.function.TimeSpaceCaptureActivity;
 import com.melon.unity.function.money.MoneyActivity;
 import com.melon.unity.function.password.PasswordActivity;
+import com.melon.unity.function.web.MelonWebActivity;
 import com.melon.unity.listener.NetCallback;
 
 public class HomeViewModel extends ViewModel {
@@ -65,7 +67,15 @@ public class HomeViewModel extends ViewModel {
         } else {
             url = Constant.URL_BING + mContent.getValue();
         }
-        CommonUtil.enterBrowser(ctx, url);
+
+        boolean isSystemBrowser = PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean("ieType", false);
+        if (isSystemBrowser) {
+            CommonUtil.enterBrowser(ctx, url);
+        } else {
+            Intent intent = new Intent(ctx, MelonWebActivity.class);
+            intent.putExtra("url", url);
+            ctx.startActivity(intent);
+        }
     }
 
     /**
@@ -79,7 +89,7 @@ public class HomeViewModel extends ViewModel {
      * 标签
      */
     public String[] getTags() {
-        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡", "沪深", "密码生成", "时空掠影"};
+        return new String[]{"密码", "上海南站", "车墩站", "聊天", "天气", "金鸡", "沪深", "中国联通", "密码生成", "时空掠影", "舜宇"};
     }
 
     public void enterTag(int position, Context ctx) {
@@ -113,12 +123,20 @@ public class HomeViewModel extends ViewModel {
                 CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "399300");
                 break;
             case 7:
+                //中国联通
+                CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "600050");
+                break;
+            case 8:
                 //随机密码
                 CommonUtil.enterActivity(ctx, RandomPasswordActivity.class);
                 break;
-            case 8:
+            case 9:
                 //时空掠影
                 CommonUtil.enterActivity(ctx, TimeSpaceCaptureActivity.class);
+                break;
+            case 10:
+                //舜宇集团
+                CommonUtil.enterBrowser(ctx, Constant.URL_BAI_DU + "02382");
                 break;
             default:
         }
