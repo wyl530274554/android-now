@@ -62,7 +62,7 @@ public class HomeViewModel extends ViewModel {
         String engineStr = PreferenceManager.getDefaultSharedPreferences(ctx).getString("engine", "0");
         int engine = Integer.parseInt(engineStr);
         LogUtil.d("engine: " + engine);
-        if (engine == 0 || NetUtil.isWifiConnected(ctx)) {
+        if (engine == 0) {
             url = Constant.URL_BAI_DU + mContent.getValue();
         } else {
             url = Constant.URL_BING + mContent.getValue();
