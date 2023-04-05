@@ -1,7 +1,6 @@
 package com.melon.unity.function.home;
 
 import static com.melon.commonlib.util.ApiUtil.API_BASE;
-import static com.melon.commonlib.util.ApiUtil.API_TOPIC;
 import static com.melon.commonlib.util.ApiUtil.APP_DOWNLOAD;
 
 import android.content.Context;
@@ -26,22 +25,22 @@ public class HomeViewModel extends ViewModel {
     /**
      * 要搜索的内容
      */
-    private final MutableLiveData<String> mContent;
+    private final MutableLiveData<String> mSearchContent;
 
     /**
      * http服务器在线状态
      */
     private final MutableLiveData<String> mServerStatus;
-    private final HomeModel mMHomeModel;
+    private final HomeModel mHomeModel;
 
     public HomeViewModel() {
-        mContent = new MutableLiveData<>();
+        mSearchContent = new MutableLiveData<>();
         mServerStatus = new MutableLiveData<>();
-        mMHomeModel = new HomeModel();
+        mHomeModel = new HomeModel();
     }
 
     public MutableLiveData<String> getContent() {
-        return mContent;
+        return mSearchContent;
     }
 
     public MutableLiveData<String> getServerStatus() {
@@ -52,7 +51,7 @@ public class HomeViewModel extends ViewModel {
      * 浏览器搜索
      */
     public void search(Context ctx) {
-        if (TextUtils.isEmpty(mContent.getValue())) {
+        if (TextUtils.isEmpty(mSearchContent.getValue())) {
             LogUtil.d("输入为空");
             return;
         }
@@ -63,9 +62,9 @@ public class HomeViewModel extends ViewModel {
         int engine = Integer.parseInt(engineStr);
         LogUtil.d("engine: " + engine);
         if (engine == 0) {
-            url = Constant.URL_BAI_DU + mContent.getValue();
+            url = Constant.URL_BAI_DU + mSearchContent.getValue();
         } else {
-            url = Constant.URL_BING + mContent.getValue();
+            url = Constant.URL_BING + mSearchContent.getValue();
         }
 
         boolean isSystemBrowser = PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean("ieType", false);
@@ -89,7 +88,7 @@ public class HomeViewModel extends ViewModel {
      * 清空输入
      */
     public void deleteSearchContent() {
-        mContent.setValue("");
+        mSearchContent.setValue("");
     }
 
     /**
@@ -151,18 +150,6 @@ public class HomeViewModel extends ViewModel {
      */
     public void requestServerStatus() {
         // 请求数据
-        mMHomeModel.requestServerStatus(new NetCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                if ("true".equals(result)) {
-                    mServerStatus.postValue("在线中");
-                }
-            }
-
-            @Override
-            public void onFail() {
-                mServerStatus.postValue("不在线");
-            }
-        });
+        mHomeModel.requestServerStatus(mServerStatus);
     }
 }
