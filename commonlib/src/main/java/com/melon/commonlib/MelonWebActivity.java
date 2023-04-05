@@ -1,15 +1,9 @@
-package com.melon.unity.function.web;
+package com.melon.commonlib;
 
 import android.annotation.SuppressLint;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.databinding.ViewDataBinding;
-
-import com.melon.commonlib.BaseActivity;
-import com.melon.unity.R;
 
 public class MelonWebActivity extends BaseActivity {
     WebView webView;
@@ -33,16 +27,6 @@ public class MelonWebActivity extends BaseActivity {
     @Override
     protected void initView() {
         webView = findViewById(R.id.wv_web);
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return !url.startsWith("http");
-            }
-        });
-        webView.setWebChromeClient(new WebChromeClient());
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setBlockNetworkImage(true);
 
         String url = getIntent().getStringExtra("url");
         webView.loadUrl(url);
