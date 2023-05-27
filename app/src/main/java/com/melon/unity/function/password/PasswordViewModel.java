@@ -1,5 +1,7 @@
 package com.melon.unity.function.password;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -18,8 +20,8 @@ public class PasswordViewModel extends ViewModel {
         return mPasswords;
     }
 
-    public void queryPasswords(String key) {
-        mModel.queryPasswords(key, new NetCallback<List<Password>>() {
+    public void queryPasswords(Context ctx, String key) {
+        mModel.queryPasswords(ctx, key, new NetCallback<List<Password>>() {
             @Override
             public void onSuccess(List<Password> passwords) {
                 //子线程中不能用setValue，要用postValue
@@ -33,6 +35,9 @@ public class PasswordViewModel extends ViewModel {
         });
     }
 
+    public void updateAllPwd(Context ctx){
+        mModel.updateAllPwd(ctx);
+    }
     public void insertPassword(Password password){
         mModel.insert(password);
     }

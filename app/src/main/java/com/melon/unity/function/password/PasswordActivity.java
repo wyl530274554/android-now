@@ -78,7 +78,7 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             //点击搜索要做的操作
             String trim = textView.getText().toString().trim();
-            mViewModel.queryPasswords(trim);
+            mViewModel.queryPasswords(getApplicationContext(), trim);
         }
         return false;
     }
@@ -104,6 +104,12 @@ public class PasswordActivity extends BaseActivity implements TextView.OnEditorA
 
         if (item.getItemId() == R.id.action_add_pwd) {
             mViewBinding.rlPasswordAdd.setVisibility(View.VISIBLE);
+            return true;
+        }
+
+        if (item.getItemId() == R.id.action_update_pwd) {
+            // 更新密码库
+            mViewModel.updateAllPwd(getApplicationContext());
             return true;
         }
         return super.onOptionsItemSelected(item);
